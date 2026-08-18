@@ -1,4 +1,9 @@
 # Operations Maintenance Process Automation & Tracking System
+
+This project is a recreated and anonymized portfolio implementation inspired by a process improvement initiative I developed in a professional operations environment. All data, names, and organizational details are fictional.
+
+The original initiative involved improving maintenance tracking, workflow visibility, reporting, and notification processes. This portfolio version demonstrates the underlying approach using synthetic data.
+
 ## Project Overview
 Maintenance operations often generate large volumes of information across forms, spreadsheets, messaging platforms, field records, and email. When these processes depend heavily on manual communication and reporting, important notifications can be delayed, maintenance activities can be overlooked, and answering basic operational questions can consume unnecessary time.
 
