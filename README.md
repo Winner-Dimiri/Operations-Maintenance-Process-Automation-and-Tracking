@@ -4,6 +4,20 @@ This project is a recreated and anonymized portfolio implementation inspired by 
 
 The original initiative involved improving maintenance tracking, workflow visibility, reporting, and notification processes. This portfolio version demonstrates the underlying approach using synthetic data.
 
+## Contents
+[Project Overview](#project-overview)
+
+[Technologies and Tools](#technologies-and-tools)
+
+[The Problem](#the-problem)
+
+[The Solution](#the-solution)
+
+[End-to-End System Architecture](#end-to-end-system-architecture)
+
+[Operational Benefits](operational-benefits)
+
+
 ## Project Overview
 Maintenance operations often generate large volumes of information across forms, spreadsheets, messaging platforms, field records, and email. When these processes depend heavily on manual communication and reporting, important notifications can be delayed, maintenance activities can be overlooked, and answering basic operational questions can consume unnecessary time.
 
@@ -26,7 +40,7 @@ The objective was not simply to automate individual tasks, but to create a more 
 
 ---
 
-## Technologies & Tools
+## Technologies and Tools
 
 The implementation demonstrates practical use of:
 
@@ -128,19 +142,19 @@ This creates a single operational flow from maintenance initiation to management
 
 ---
 
-## Key Components
+### Key Components
 
-### 1. Structured Maintenance Forms
+#### 1. Structured Maintenance Forms
 
 Two separate forms were created to capture maintenance activities according to their operational nature.
 
-#### Preventive Maintenance Form
+##### Preventive Maintenance Form
 
 Used for planned maintenance activities.
 
 Because preventive maintenance is scheduled in advance, submissions can be made before the maintenance date.
 
-#### Corrective Maintenance Form
+##### Corrective Maintenance Form
 
 Used for unplanned or urgent maintenance activities.
 
@@ -148,11 +162,11 @@ Corrective maintenance can involve issues such as equipment failure or service d
 
 Separating the two workflows allowed each type of maintenance to have an appropriate notification strategy.
 
-### 2. Automated Corrective Maintenance Notification
+#### 2. Automated Corrective Maintenance Notification
 
 Corrective maintenance uses an immediate notification workflow.
 
-#### Trigger
+##### Trigger
 
 **On form submission**
 
@@ -176,13 +190,15 @@ Corrective maintenance can represent an active operational problem. For example,
 
 The objective is therefore to minimize the time between issue identification and stakeholder awareness.
 
-### 3. Automated Preventive Maintenance Notification
+[Click here to view the Corrective Maintenance Notification](https://github.com/Winner-Dimiri/Operations-Maintenance-Process-Automation-and-Tracking/blob/main/Images/Corrective%20Maintenance%20Notification.png)
+
+#### 3. Automated Preventive Maintenance Notification
 
 Preventive maintenance follows a different notification model because it is planned.
 
 The system automatically checks maintenance activities scheduled for the current day during a defined period.
 
-#### Automated workflow
+##### Automated workflow
 
 ```text
 Maintenance records
@@ -200,7 +216,7 @@ Update notification status
 
 The notification status prevents the same maintenance activity from being automatically notified again.
 
-#### Why this approach?
+##### Why this approach?
 
 The maintenance record should normally exist before the maintenance date.
 
@@ -213,7 +229,7 @@ This reduces the risk of:
 * Missed planned maintenance
 * Repeated notifications
 
-#### Exception handling
+##### Exception handling
 
 If a maintenance activity for the current day is submitted after the automated notification window, the notification can be triggered manually by changing the notification status to "Send".
 
@@ -224,8 +240,9 @@ This creates a simple control mechanism:
 ```text
 Send → Notification triggered → Sent
 ```
+[Click here to view the Preventive Maintenance Notification](https://github.com/Winner-Dimiri/Operations-Maintenance-Process-Automation-and-Tracking/blob/main/Images/Preventive%20Maintenance%20Notification.png)
 
-### 4. Centralized Maintenance Tracking
+#### 4. Centralized Maintenance Tracking
 
 The notification system solved the communication problem, but another challenge remained:
 
@@ -248,7 +265,9 @@ The tracker provides visibility into:
 
 Thus turning individual maintenance records into an operational monitoring system.
 
-### 5. Maintenance Dashboard
+[Click here to view the Maintenance Tracker](https://github.com/Winner-Dimiri/Operations-Maintenance-Process-Automation-and-Tracking/blob/main/Images/Maintenance%20Tracker.png)
+
+#### 5. Maintenance Dashboard
 
 As maintenance records accumulated, another operational need became clear.
 
@@ -266,13 +285,14 @@ How many maintenance issues are still pending?
 
 Instead of repeatedly filtering and manipulating the underlying spreadsheet, I developed a maintenance dashboard that provides these answers at a glance.
 
-#### Key KPIs
+##### Key KPIs
 
 The dashboard provides visibility into:
 
 * Total Sites
 * Sites Due This Month
 * Sites Due Next Month
+* Overdue Sites
 * Sites Completed This Month
 * Pending Issues
 * Sites Completed This Week
@@ -280,40 +300,46 @@ The dashboard provides visibility into:
 
 This changes the spreadsheet from a passive record of maintenance activities into an operational decision-support tool.
 
-### 6. Due Maintenance Monitoring
+[Click here to view the key KPIs](https://github.com/Winner-Dimiri/Operations-Maintenance-Process-Automation-and-Tracking/blob/main/Images/Dashboard_KPI.png)
+
+#### 6. Due Maintenance Monitoring
 
 The dashboard provides a detailed view of sites due for maintenance during the current month.
 
 The view includes:
 
-| Field                     | Purpose                                                       |
-| ------------------------- | ------------------------------------------------------------- |
-| Site Name                 | Identifies the maintenance location                           |
-| Group                     | Shows the responsible operational group                       |
-| Assigned Engineer         | Identifies ownership                                          |
-| Last Maintenance Date     | Shows the previous maintenance activity                       |
-| Next Maintenance Date     | Shows when maintenance is due                                 |
-| Days Remaining            | Indicates urgency                                             |
-| Current Status            | Shows whether the activity is overdue, due today, or due soon |
+| Field                      | Purpose                                                       |
+| ---------------------------| ------------------------------------------------------------- |
+| Site Name                  | Identifies the maintenance location                           |
+| Cluster of Sites (COS)     | Shows the responsible operational group                       |
+| Assigned Site Engineer (SE)| Identifies the site engineer responsible for the maintenance  |
+| Last Maintenance Date      | Shows the previous maintenance activity                       |
+| Next Maintenance Date      | Shows when maintenance is due                                 |
+| Days Remaining             | Indicates urgency                                             |
+| Current Status             | Shows whether the activity is overdue, due today, or due soon |
 
 This allows the team to identify upcoming maintenance activities without manually searching through the entire tracker.
 
-### 7. Next-Month Maintenance Visibility
+[Click here to view](https://github.com/Winner-Dimiri/Operations-Maintenance-Process-Automation-and-Tracking/blob/main/Images/Due%20This%20Month.png)
+
+#### 7. Next-Month Maintenance Visibility
 
 The dashboard also provides a forward-looking view of sites scheduled for maintenance in the following month.
 
 This supports early planning by showing:
 
 * Site
-* NOC
-* Assigned engineer
+* COS
+* Assigned Site engineer
 * Last maintenance date
 * Next maintenance date
 * Days remaining
 
 The objective is to move maintenance management from reactive tracking to proactive planning.
 
-### 8. Overdue Maintenance Monitoring
+[Click here to view](https://github.com/Winner-Dimiri/Operations-Maintenance-Process-Automation-and-Tracking/blob/main/Images/Due%20Next%20Month.png)
+
+#### 8. Overdue Maintenance Monitoring
 
 Overdue maintenance receives a dedicated view.
 
@@ -331,7 +357,9 @@ A negative value immediately communicates that follow-up is required.
 
 This provides a simple way to prioritize overdue maintenance activities.
 
-### 9. Automated Weekly Reporting
+[Click here to view](https://github.com/Winner-Dimiri/Operations-Maintenance-Process-Automation-and-Tracking/blob/main/Images/Overdue%20Sites.png)
+
+#### 9. Automated Weekly Reporting
 
 The maintenance workflow was extended beyond tracking and dashboarding to address weekly reporting.
 
@@ -339,7 +367,7 @@ Previously, after auditing maintenance records collected through the field repor
 
 The improved workflow separates data auditing from report preparation.
 
-#### New workflow
+##### New workflow
 
 ```text
 Maintenance Records
@@ -364,6 +392,8 @@ The reporting view automatically extracts the required fields and reporting peri
 The weekly email is then automatically sent during the defined reporting window.
 
 This allows the audit process to remain the main human-controlled activity while repetitive report preparation and distribution are automated.
+
+[Click here to view the automated weekly report](https://github.com/Winner-Dimiri/Operations-Maintenance-Process-Automation-and-Tracking/blob/main/Images/Report.png)
 
 ---
 
